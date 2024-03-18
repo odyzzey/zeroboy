@@ -1,0 +1,10 @@
+[package]
+name = "emulator"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+risc0-zkvm = { version = "0.20.1", default-features = false, features = ['std'] }
+gameboy = { path = "../../gameboy" }
