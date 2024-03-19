@@ -1,3 +1,5 @@
+// Note: Game BoyTM, Game Boy PocketTM, Super Game BoyTM and Game Boy ColorTM are registered trademarks of
+// Nintendo CO., LTD. © 1989 to 1999 by Nintendo CO., LTD.
 use gameboy::motherboard::MotherBoard;
 use gameboy::gpu::{SCREEN_H, SCREEN_W};
 
