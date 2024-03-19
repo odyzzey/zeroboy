@@ -1,16 +1,23 @@
+use gameboy::motherboard::MotherBoard;
+use gameboy::gpu::{SCREEN_H, SCREEN_W};
 
-
-use gameboy;
 use risc0_zkvm::guest::env;
 
 fn main() {
-    // TODO: Implement your guest code here
+    let mut rom = String::from(env::read::<String>());
+    let mut mbrd = MotherBoard::power_up(&rom);
+    let rom_name = mbrd.mmu.borrow().cartridge.title();
 
+    loop {
+        if env::cycle_count() >= 1000000 {
+            break;
+        }
+        // this needs a break condition
+        mbrd.next();
+
+        if !mbrd.cpu.flip() {
+            continue;
+        }
+    }
     // read the input
-    let input: u32 = env::read();
-
-    // TODO: do something with the input
-
-    // write public output to the journal
-    env::commit(&input);
 }
