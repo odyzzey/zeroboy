@@ -7,7 +7,7 @@ use risc0_zkvm::guest::env;
 
 fn main() {
     let mut rom = env::read::<String>();
-    let mut mbrd = MotherBoard::power_up(&rom);
+    let mut mbrd = MotherBoard::power_up(rom.into_bytes());
 
     loop {
         // Breaking at an arbitrary cycle count
