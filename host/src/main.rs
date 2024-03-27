@@ -10,27 +10,8 @@ fn main() {
     tracing_subscriber::fmt()
         .with_env_filter(tracing_subscriber::filter::EnvFilter::from_default_env())
         .init();
-/*
-    let start_time = std::time::Instant::now();
 
-    // we'll read the ROM into a string from a file at ../../gameboy/res/sml
-    // this is the host so we have access to the file system
-    // let rom: String = std::fs::read_to_string("sgameboy/res/sml.gb").unwrap().into();
-    let mut rom = String::from("");
-    {
-        let mut ap = argparse::ArgumentParser::new();
-        ap.set_description("Gameboy emulator");
-        ap.refer(&mut rom)
-            .add_argument("rom", argparse::Store, "The ROM file to run")
-            .required();
-        ap.parse_args_or_exit();
-    }
-
-    let rom = std::fs::read(&rom).unwrap();
-*/
     let env = ExecutorEnv::builder()
-        // .write(&rom)
-        // .unwrap()
         .build()
         .unwrap();
 
