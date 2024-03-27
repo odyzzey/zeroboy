@@ -1,0 +1,12 @@
+[package]
+name = "gameboy"
+version = "1.0.0"
+authors = ["mohanson <mohanson@outlook.com>"]
+edition = "2021"
+
+[dependencies]
+# argparse = "0.2"
+blip_buf = { path = "./blip_buf-rs" }
+# cpal = "0.15"
+# minifb = "0.25"
+# rog = "0.1"
