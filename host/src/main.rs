@@ -10,39 +10,42 @@ fn main() {
     tracing_subscriber::fmt()
         .with_env_filter(tracing_subscriber::filter::EnvFilter::from_default_env())
         .init();
+/*
+    let start_time = std::time::Instant::now();
 
-    // An executor environment describes the configurations for the zkVM
-    // including program inputs.
-    // An default ExecutorEnv can be created like so:
-    // `let env = ExecutorEnv::builder().build().unwrap();`
-    // However, this `env` does not have any inputs.
-    //
-    // To add add guest input to the executor environment, use
-    // ExecutorEnvBuilder::write().
-    // To access this method, you'll need to use ExecutorEnv::builder(), which
-    // creates an ExecutorEnvBuilder. When you're done adding input, call
-    // ExecutorEnvBuilder::build().
+    // we'll read the ROM into a string from a file at ../../gameboy/res/sml
+    // this is the host so we have access to the file system
+    // let rom: String = std::fs::read_to_string("sgameboy/res/sml.gb").unwrap().into();
+    let mut rom = String::from("");
+    {
+        let mut ap = argparse::ArgumentParser::new();
+        ap.set_description("Gameboy emulator");
+        ap.refer(&mut rom)
+            .add_argument("rom", argparse::Store, "The ROM file to run")
+            .required();
+        ap.parse_args_or_exit();
+    }
 
-    // For example:
-    let input: u32 = 15 * u32::pow(2, 27) + 1;
+    let rom = std::fs::read(&rom).unwrap();
+*/
     let env = ExecutorEnv::builder()
-        .write(&input)
-        .unwrap()
+        // .write(&rom)
+        // .unwrap()
         .build()
         .unwrap();
 
     // Obtain the default prover.
     let prover = default_prover();
 
+    println!("proving...");
+
     // Produce a receipt by proving the specified ELF binary.
     let receipt = prover
         .prove(env, EMULATOR_ELF)
         .unwrap();
 
+    println!("receipt...");
     // TODO: Implement code for retrieving receipt journal here.
-
-    // For example:
-    let _output: u32 = receipt.journal.decode().unwrap();
 
     // The receipt was verified at the end of proving, but the below code is an
     // example of how someone else could verify this receipt.
