@@ -1699,22 +1699,22 @@ impl Rtc {
 
     // Function next simulates real hardware execution speed, by limiting the frequency of the function cpu.next().
     pub fn next(&mut self) -> u32 {
-        if self.step_cycles > STEP_CYCLES {
-            self.step_flip = true;
-            self.step_cycles -= STEP_CYCLES;
-            /* let now = time::Instant::now();
-            let d = now.duration_since(self.step_zero);
-            let s = u64::from(STEP_TIME.saturating_sub(d.as_millis() as u32));
-            // rog::debugln!("CPU: sleep {} millis", s);
-            thread::sleep(time::Duration::from_millis(s)); */
-            // self.step_zero = self.step_zero.checked_add(time::Duration::from_millis(u64::from(STEP_TIME))).unwrap();
-
-            // If now is after the just updated target frame time, reset to
-            // avoid drift.
-            /* if now.checked_duration_since(self.step_zero).is_some() {
-                self.step_zero = now;
-            } */
-        }
+        // if self.step_cycles > STEP_CYCLES {
+        //     self.step_flip = true;
+        //     self.step_cycles -= STEP_CYCLES;
+        //     /* let now = time::Instant::now();
+        //     let d = now.duration_since(self.step_zero);
+        //     let s = u64::from(STEP_TIME.saturating_sub(d.as_millis() as u32));
+        //     // rog::debugln!("CPU: sleep {} millis", s);
+        //     thread::sleep(time::Duration::from_millis(s)); */
+        //     // self.step_zero = self.step_zero.checked_add(time::Duration::from_millis(u64::from(STEP_TIME))).unwrap();
+        //
+        //     // If now is after the just updated target frame time, reset to
+        //     // avoid drift.
+        //     /* if now.checked_duration_since(self.step_zero).is_some() {
+        //         self.step_zero = now;
+        //     } */
+        // }
         let cycles = self.cpu.next();
         self.step_cycles += cycles;
         cycles
