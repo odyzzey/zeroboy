@@ -11,7 +11,7 @@ fn main() {
     loop {
         // Breaking at an arbitrary cycle count
         if env::cycle_count() >= 11000000 {
-            let mut window_buffer: Vec<u32> = vec![0; SCREEN_W * SCREEN_H];
+            /* let mut window_buffer: Vec<u32> = vec![0; SCREEN_W * SCREEN_H];
             let mut i: usize = 0;
             for l in mbrd.mmu.borrow().gpu.data.iter() {
                 for w in l.iter() {
@@ -24,7 +24,10 @@ fn main() {
                     i += 1;
                 }
             }
-            env::commit(&window_buffer);
+            env::commit(&window_buffer); */
+            // env::commit(&get_registers(&mbrd));
+            // env::write(&get_registers(&mbrd));
+            println!("{}", get_registers(&mbrd));
             env::exit(0);
         }
 
@@ -34,4 +37,17 @@ fn main() {
             continue;
         }
     }
+}
+
+fn get_registers(mbrd: &MotherBoard) -> String {
+    let mut registers = String::new();
+    registers.push_str(&format!("A: {:02X} ", mbrd.cpu.cpu.reg.a));
+    registers.push_str(&format!("F: {:02X} ", mbrd.cpu.cpu.reg.f));
+    registers.push_str(&format!("B: {:02X} ", mbrd.cpu.cpu.reg.b));
+    registers.push_str(&format!("C: {:02X} ", mbrd.cpu.cpu.reg.c));
+    registers.push_str(&format!("D: {:02X} ", mbrd.cpu.cpu.reg.d));
+    registers.push_str(&format!("E: {:02X} ", mbrd.cpu.cpu.reg.e));
+    registers.push_str(&format!("H: {:02X} ", mbrd.cpu.cpu.reg.h));
+    registers.push_str(&format!("L: {:02X} ", mbrd.cpu.cpu.reg.l));
+    registers
 }
