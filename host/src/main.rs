@@ -12,6 +12,8 @@ fn main() {
         .init();
 
     let env = ExecutorEnv::builder()
+        .write(&11000000u64) // guest will look for cycle limit
+        .unwrap()
         .build()
         .unwrap();
 

@@ -6,11 +6,13 @@ use gameboy::gpu::{SCREEN_H, SCREEN_W};
 use risc0_zkvm::guest::env;
 const ROM: &[u8] = include_bytes!("../../rom.gb");
 fn main() {
-    env::write(&env::cycle_count().to_string());
+    //env::write(&env::cycle_count().to_string());
+    let cycle_limit: u64 = env::read();
+
     let mut mbrd = MotherBoard::power_up(ROM.to_vec());
     loop {
         // Breaking at an arbitrary cycle count
-        if env::cycle_count() >= 11000000 {
+        if env::cycle_count() >= cycle_limit as usize {
             /* let mut window_buffer: Vec<u32> = vec![0; SCREEN_W * SCREEN_H];
             let mut i: usize = 0;
             for l in mbrd.mmu.borrow().gpu.data.iter() {
