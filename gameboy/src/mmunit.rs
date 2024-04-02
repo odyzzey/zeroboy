@@ -11,7 +11,6 @@ use super::memory::Memory;
 use super::serial::Serial;
 use super::timer::Timer;
 use std::cell::RefCell;
-use std::path::Path;
 use std::rc::Rc;
 
 #[derive(Clone, Copy, Eq, PartialEq)]

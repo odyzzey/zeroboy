@@ -2,7 +2,6 @@ use super::cpu::Rtc;
 use super::memory::Memory;
 use super::mmunit::Mmunit;
 use core::cell::RefCell;
-use std::path::Path;
 use std::rc::Rc;
 
 pub struct MotherBoard {

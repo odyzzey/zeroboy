@@ -5,8 +5,6 @@ use super::register::Flag::{C, H, N, Z};
 use super::register::Register;
 use std::cell::RefCell;
 use std::rc::Rc;
-use std::thread;
-use std::time;
 
 pub const CLOCK_FREQUENCY: u32 = 4_194_304;
 pub const STEP_TIME: u32 = 16;

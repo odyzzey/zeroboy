@@ -97,18 +97,18 @@ pub struct Mbc1 {
     bank_mode: BankMode, // MBC1 has two different maximum memory modes: 16Mbit ROM/8KByte RAM or 4Mbit ROM/32KByte RAM.
     bank: u8,
     ram_enable: bool,
-    sav_path: PathBuf,
+    //sav_path: PathBuf,
 }
 
 impl Mbc1 {
-    pub fn power_up(rom: Vec<u8>, ram: Vec<u8>, sav: impl AsRef<Path>) -> Self {
+    pub fn power_up(rom: Vec<u8>, ram: Vec<u8>, _sav: impl AsRef<Path>) -> Self {
         Mbc1 {
             rom,
             ram,
             bank_mode: BankMode::Rom, // The MBC1 defaults to 16Mbit ROM/8KByte RAM mode on power up.
             bank: 0x01,
             ram_enable: false,
-            sav_path: PathBuf::from(sav.as_ref()),
+            //sav_path: PathBuf::from(sav.as_ref()),
         }
     }
 
@@ -626,7 +626,7 @@ impl Stable for HuC1 {
 //  13h  MBC3+RAM+BATTERY         FFh  HuC1+RAM+BATTERY
 pub fn power_up(file: Vec<u8> ) -> Box<dyn Cartridge> {
     // rog::debugln!("Loading cartridge from {:?}", path.as_ref());
-    let mut rom = file;
+    let rom = file;
     if rom.len() < 0x150 {
         panic!("Missing required information area which located at 0100-014F")
     }
@@ -754,7 +754,7 @@ fn ram_read(path: impl AsRef<Path>, size: usize) -> Vec<u8> {
 }
 
 // Readable form of MBC representation
-fn mbc_info(b: u8) -> String {
+pub fn mbc_info(b: u8) -> String {
     String::from(match b {
         0x00 => "ROM ONLY",
         0x01 => "MBC1",
